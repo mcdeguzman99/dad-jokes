@@ -6,15 +6,16 @@ This demo app shows ten random Dad Jokes.
 
 ## Getting Started
 
-### Installing
+### Installing to run locally
 
 - Clone this repository
 - `npm i`
 - `npx webpack`
+- Open project in VSCode, open /dist/index.html, then Open Preview.
 
-### Dad Jokes
+### Demo
 
-To see ten random Dad Jokes, view http://127.0.0.1:3000/dist/index.html in your browser.
+[To see ten Dad Jokes, click here.](https://mcdeguzman99.github.io/dad-jokes/dist/index.html)
 
 ## Acknowledgments
 
