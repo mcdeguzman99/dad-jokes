@@ -1,6 +1,4 @@
-# Project Title
-
-Dad Jokes
+# Dad Jokes
 
 ## Description
 
