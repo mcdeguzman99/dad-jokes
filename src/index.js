@@ -1,14 +1,17 @@
-import { getJokes, renderJokes } from './jokes.js'
-import { loadMoreButtonHandler } from './load-button.js'
-import { currentPage, jokes, setJokes } from './store.js'
+import { Jokes } from './jokes.js'
+
+const jokes = new Jokes()
 
 // Render initial ten jokes
-if (jokes.length === 0) {
-  const newJokes = await getJokes(currentPage)
-  setJokes(newJokes)
-  renderJokes()
+if (jokes.currentPage === 0) {
+  await jokes.getJokes()
+  jokes.renderJokes()
 }
 
 // Attach event listener to 'load more' button
 const loadMoreButton = document.getElementById('load-more-button')
-loadMoreButton.addEventListener('click', loadMoreButtonHandler)
+loadMoreButton.addEventListener('click', jokes.loadMoreHandler)
+
+// Search bar functionality
+const input = document.getElementById('search-bar')
+input.addEventListener('input', jokes.updateSearchResults)

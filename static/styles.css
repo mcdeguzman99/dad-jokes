@@ -18,12 +18,21 @@ h1 {
   font-size: 64px;
 }
 
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
 button {
   background-color: black;
   color: white;
-  margin-top: 16px;
+  margin: 16px 0;
   padding: 16px;
   font-size: 24px;
+}
+
+input {
+  padding: 16px;
 }
 
 button:hover {
@@ -52,4 +61,8 @@ li {
 li p {
   font-size: 24px;
   padding: 24px;
+}
+
+#results {
+  padding-top: 24px;
 }

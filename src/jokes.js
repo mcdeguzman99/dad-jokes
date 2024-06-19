@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { incrementCurrentPage, currentPage, jokes } from './store.js'
+import { jokesFixture } from './fixture.js'
 
 const API_BASE_URL = 'https://icanhazdadjoke.com'
 
@@ -9,30 +9,55 @@ const config = {
   },
 }
 
-export const getJokes = async () => {
-  incrementCurrentPage()
-  try {
-    const jokesData = await axios.get(
-      `${API_BASE_URL}/search?page=${currentPage}&limit=10`,
-      config
-    )
-
-    return jokesData.data.results
-    // return jokesFixture.data.results
-  } catch (error) {
-    console.log('Unexpected error occurred calling the Dad Jokes API', error)
+export class Jokes {
+  constructor() {
+    this.currentPage = 0
+    this.jokes = []
   }
-}
 
-export const renderJokes = () => {
-  const resultsNode = document.getElementById('jokes')
-  resultsNode.innerHTML = ''
+  getJokes = async () => {
+    this.currentPage = this.currentPage + 1
 
-  jokes.map(({ joke }) => {
-    resultsNode.innerHTML += `
-      <li>
-        <p>${joke}</p>
-      </li>
-    `
-  })
+    try {
+      const jokesData = await axios.get(
+        `${API_BASE_URL}/search?page=${this.currentPage}&limit=10`,
+        config
+      )
+      this.jokes = jokesData.data.results
+    } catch (error) {
+      console.log('Unexpected error occurred calling the Dad Jokes API', error)
+    }
+  }
+
+  renderJokes = () => {
+    const resultsNode = document.getElementById('jokes')
+    this.jokes.map(({ joke }) => {
+      resultsNode.innerHTML += `
+        <li>
+          <p>${joke}</p>
+        </li>
+      `
+    })
+  }
+
+  loadMoreHandler = async () => {
+    await getJokes()
+    renderJokes()
+  }
+
+  updateSearchResults = (event) => {
+    const searchTerm = event.target.value
+    let searchResultsNode = document.getElementById('results')
+
+    searchResultsNode.innerText = ''
+    this.jokes.map(({ joke }) => {
+      if (joke.includes(searchTerm)) {
+        searchResultsNode.innerHTML += `
+          <li>
+            <p>${joke}</p>
+          </li>
+        `
+      }
+    })
+  }
 }
