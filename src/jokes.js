@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { jokesFixture } from './fixture.js'
 
 const API_BASE_URL = 'https://icanhazdadjoke.com'
 
