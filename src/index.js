@@ -1,6 +1,6 @@
 import { Jokes } from './jokes.js'
 
-const jokes = new Jokes()
+export const jokes = new Jokes()
 
 // Render initial ten jokes
 if (jokes.currentPage === 0) {

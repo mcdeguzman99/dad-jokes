@@ -30,6 +30,8 @@ export class Jokes {
 
   renderJokes = () => {
     const resultsNode = document.getElementById('jokes')
+    resultsNode.innerHTML = ''
+
     this.jokes.map(({ joke }) => {
       resultsNode.innerHTML += `
         <li>
@@ -40,8 +42,8 @@ export class Jokes {
   }
 
   loadMoreHandler = async () => {
-    await getJokes()
-    renderJokes()
+    await this.getJokes()
+    this.renderJokes()
   }
 
   updateSearchResults = (event) => {

@@ -1,9 +1,7 @@
-import { getJokes, renderJokes } from './jokes.js'
-import { setJokes } from './store.js'
+import { jokes } from './index.js'
 
 // Load more jokes button handler
 export const loadMoreButtonHandler = async () => {
-  const newJokes = await getJokes()
-  setJokes(newJokes)
-  renderJokes()
+  await jokes.getJokes()
+  jokes.renderJokes()
 }
